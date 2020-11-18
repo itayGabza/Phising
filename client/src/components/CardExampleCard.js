@@ -1,12 +1,43 @@
-import React, { useState }from 'react'
+import React, { useEffect, useState }from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-
+import axios from 'axios';
+const headers = {
+  'Content-Type': 'application/json'
+}
 
 const CardExampleCard = (props) => {
-  const [upVote, setUpVote] = useState('');
-  const [downVote, setDownVote] = useState('');
+  const [upVote, setUpVote] = useState();
+  const [downVote, setDownVote] = useState();
 
-  
+
+  useEffect(() => {
+    setUpVote(props.upVote);
+    setDownVote(props.downVote);
+  }, []);
+
+  const upVoteHandler = () => {
+    console.log(props.id);
+    const data = { imageId: props.id};
+    axios.post('http://localhost:6060/image/upvote', data, {headers: headers})
+    .then(res => {
+      setUpVote(upVote + 1);
+    })
+    .catch(err => {
+      console.log(err);
+     
+    })
+  }
+  const downVoteHandler = () => {
+    const data = {imageId: props.id};
+    axios.post('http://localhost:6060/image/downvote', data, {headers: headers})
+    .then(res => {
+      console.log(res);
+      setDownVote(downVote +1);
+    })
+    .catch(err =>{
+      console.log(err);
+    })
+  }
 
   return (
     <Card>
@@ -24,16 +55,12 @@ const CardExampleCard = (props) => {
       </Card.Content>
       <Card.Content extra>
         <a>
-          <Icon name='thumbs up' />
-          {props.upVotes}
-          <a> 25 </a>
+          <Icon name='thumbs up' onClick={upVoteHandler}/>
+          {upVote}
         </a>
         <a>
-          <Icon name='thumbs down' />
-          {props.downVotes}
-          <a>
-            25
-          </a>
+          <Icon name='thumbs down' onClick={downVoteHandler} />
+          {downVote}
         </a>
       </Card.Content>
     </Card>

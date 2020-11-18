@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Card, Icon, Image } from 'semantic-ui-react'
+import { Grid, Card, Image } from 'semantic-ui-react'
 import Moran from '../pictures/team/Moran.jpg'
 import Asaf from '../pictures/team/Asaf.jpg'
 import Itay from '../pictures/team/Itay.jpg'

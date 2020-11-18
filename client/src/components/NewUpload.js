@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FileUpload from "../components/FileUpload";
-import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react'
+import { Form, Input, TextArea } from 'semantic-ui-react'
 
 
 const NewUpload = () => {

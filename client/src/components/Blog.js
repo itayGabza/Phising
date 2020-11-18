@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { Grid } from 'semantic-ui-react'
 
-
 const Blog = () => {
 
   const [pictures, setPictures] = useState([]);
@@ -13,9 +12,10 @@ const Blog = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('https://picsum.photos/v2/list?page=0&limit=10')
+    axios.get('http://localhost:6060/images?num=9')
       .then(res => {
-        setPictures(res.data.slice(0, 9));
+        console.log(res);
+        setPictures(res.data);
         setLoad(true);
       })
       .catch(err => {
@@ -32,7 +32,7 @@ const Blog = () => {
           :
           pictures.map((picture, index) =>
             <Grid.Column key={index}>
-              <CardExampleCard logo={picture.download_url} id={picture.id} author={picture.author} upVotes={picture.upVotes} downVotes={picture.downVotes} />
+              <CardExampleCard logo={picture.download_url} id={picture.id} author={picture.author} upVote={picture.upVote} downVote={picture.downVote} />
             </Grid.Column>
           )}
       </Grid>);
