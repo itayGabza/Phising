@@ -8,6 +8,7 @@ const headers = {
 const CardExampleCard = (props) => {
   const [upVote, setUpVote] = useState();
   const [downVote, setDownVote] = useState();
+  const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const CardExampleCard = (props) => {
   const upVoteHandler = () => {
     console.log(props.id);
     const data = { imageId: props.id};
-    axios.post('http://localhost:6060/image/upvote', data, {headers: headers})
+    axios.post(`${backend_url}/image/upvote`, data, {headers: headers})
     .then(res => {
       setUpVote(upVote + 1);
     })
@@ -29,7 +30,7 @@ const CardExampleCard = (props) => {
   }
   const downVoteHandler = () => {
     const data = {imageId: props.id};
-    axios.post('http://localhost:6060/image/downvote', data, {headers: headers})
+    axios.post(`${backend_url}/image/downvote`, data, {headers: headers})
     .then(res => {
       console.log(res);
       setDownVote(downVote +1);

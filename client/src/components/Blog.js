@@ -6,13 +6,14 @@ import axios from 'axios';
 import { Grid } from 'semantic-ui-react'
 
 const Blog = () => {
-
   const [pictures, setPictures] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState('');
+  const backend_url = process.env.REACT_APP_BACKEND_URL;
 
+  console.log(backend_url);
   useEffect(() => {
-    axios.get('http://localhost:6060/images?num=9')
+    axios.get(`${backend_url}/images?num=9`)
       .then(res => {
         console.log(res);
         setPictures(res.data);

@@ -28,7 +28,7 @@ const TheTeam = () => (
                     <Card.Content>
                         <Card.Header>Moran</Card.Header>
                         <Card.Meta>
-                            <span className='date'>Developer</span>
+                            <span className='date'>Chief</span>
                         </Card.Meta>
                     </Card.Content>
                     <Card.Content extra>

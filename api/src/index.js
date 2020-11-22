@@ -12,6 +12,7 @@ const { clientOrigins, serverPort } = require("./config/env.dev");
 const { messagesRouter } = require("./messages/messages.router");
 var ImagesDB = require("./ImagesDB.js");
 
+const path = require('path');
 
 /**
  * App Variables
@@ -54,6 +55,7 @@ app.post('/image/upvote', function(req, res){
   const imageId = req.body.imageId;
   imagesDB.setUpVote(imageId);
   res.status(200).send("success");
+  console.log("supp");
 });
 
 app.post('/image/downvote', function(req, res){
@@ -62,10 +64,25 @@ app.post('/image/downvote', function(req, res){
   res.status(200).send("success");
 });
 
+app.post('/image/newimage', function(req, res){
+  const image = req.body.formData;
+  console.log("Helllo");
+  if(req.body !=null){
+    res.status(200).send("sucess");
+    console.log("Helllo2");
+    console.log(req.body.formData);
+  }else{
+    res.status(200).send("not sucess");
+    console.log("Helllo3");
+  }
+  
+});
+
 app.use(function (err, req, res, next) {
   console.log(err);
   res.status(500).send(err.message);
 });
+
 
 
 /**
