@@ -22,7 +22,7 @@ const app = express();
 const apiRouter = express.Router();
 
 
-app.get('/ping', function (req, res) {
+app.get('/api/ping', function (req, res) {
   res.send('pong')
 });
 
