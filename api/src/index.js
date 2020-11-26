@@ -42,29 +42,29 @@ app.use(bodyParser.json());
 app.use("/api", apiRouter);
 
 
-apiRouter.use("/messages", messagesRouter);
+apiRouter.use("/api/messages", messagesRouter);
 
 
-app.get('/images', function(req, res){
+app.get('/api/images', function(req, res){
   const num = req.query.num;
   res.status(200).send(imagesDB.getImages(num));
 
 });
 
-app.post('/image/upvote', function(req, res){
+app.post('/api/image/upvote', function(req, res){
   const imageId = req.body.imageId;
   imagesDB.setUpVote(imageId);
   res.status(200).send("success");
   console.log("supp");
 });
 
-app.post('/image/downvote', function(req, res){
+app.post('/api/image/downvote', function(req, res){
   const imageId = req.body.imageId;
   imagesDB.setDownVote(imageId);
   res.status(200).send("success");
 });
 
-app.post('/image/newimage', function(req, res){
+app.post('/api/image/newimage', function(req, res){
   const image = req.body.formData;
   console.log("Helllo");
   if(req.body !=null){
