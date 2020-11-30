@@ -26,6 +26,12 @@ app.get('/api/ping', function (req, res) {
   res.send('pong')
 });
 
+// Setting up a route for our API
+app.get('/api/', (req, res) => {
+    return res.status(200).json({
+        status: "success"
+    })
+});
 
 /**
  *  App Configuration
