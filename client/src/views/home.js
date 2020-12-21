@@ -3,7 +3,8 @@ import Blog from "../components/Blog";
 import Openner from "../components/openner";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TheTeam from "../components/TheTeam";
-import ImageUpload from "../components/ImageUpload";
+import ImageUpload from "../components/FileUpload";
+import FileUpload from "../components/FileUpload";
 
 
 import { Container, Divider } from 'semantic-ui-react'
@@ -19,10 +20,9 @@ const Home = () => {
       </Container>
       <Divider />
       <Container textAlign='center'>
-        <ImageUpload />
-        <h1>File Upload</h1>
+      <h1>File Upload</h1>
+        <FileUpload />
       </Container>
-      <Divider />
       <Container textAlign='center'>
         <TheTeam />
       </Container>

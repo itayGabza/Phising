@@ -7,12 +7,15 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const { clientOrigins, serverPort } = require("./config/env.dev");
 const { messagesRouter } = require("./messages/messages.router");
 var ImagesDB = require("./ImagesDB.js");
 
 const path = require('path');
+
+
 
 /**
  * App Variables
@@ -39,13 +42,14 @@ app.get('/api/', (req, res) => {
 
 const imagesDB = new ImagesDB();
 
-
+app.use(express.static('public'));
 app.use(helmet());
 app.use(cors({ origin: clientOrigins }));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(bodyParser.json());
 app.use("/api", apiRouter);
+app.use(fileUpload());
 
 
 apiRouter.use("/api/messages", messagesRouter);
@@ -83,6 +87,23 @@ app.post('/api/image/newimage', function(req, res){
   }
   
 });
+
+app.post('/api/upload', (req, res) => {
+  if (!req.files) {
+      return res.status(500).send({ msg: "file is not found" })
+  }
+      // accessing the file
+  const myFile = req.files.file;
+  //  mv() method places the file inside public directory
+  myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+      if (err) {
+          console.log(err)
+          return res.status(500).send({ msg: "Error occured" });
+      }
+      // returing the response with file path and name
+      return res.send({name: myFile.name, path: `/${myFile.name}`});
+  });
+})
 
 app.use(function (err, req, res, next) {
   console.log(err);

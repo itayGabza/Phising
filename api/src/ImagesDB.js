@@ -38,8 +38,6 @@ module.exports = class ImagesDB {
     setDownVote(imageId){
       (this.images[imageId])["downVote"] =  (this.images[imageId])["downVote"] + 1;
     }
-
- 
   };
 
   
